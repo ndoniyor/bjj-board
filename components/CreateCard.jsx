@@ -5,6 +5,7 @@ import './css/CreateCard.css'
 export default function CreateCard() {
   const [title, setTitle] = useState("");
   const [link, setLink] = useState("");
+  const [body, setBody] = useState("");
   const [skills, setSkills] = useState("");
   const [category, setCategory] = useState("");
   const [retry, setRetry] = useState(false);
@@ -12,7 +13,7 @@ export default function CreateCard() {
   const createPost = async (event) => {
     await supabase
       .from("posts")
-      .insert({ title: title, link: link, skills: skills, category: category })
+      .insert({ title: title, link: link, skills: skills, category: category, body: body })
       .select();
 
     window.location = "/";
@@ -23,15 +24,19 @@ export default function CreateCard() {
   };
 
   const handleTitle = (event) => {
-    setTitle(event.target.value.toLowerCase());
+    setTitle(event.target.value);
   };
 
   const handleLink = (event) => {
-    setLink(event.target.value.toLowerCase());
+    setLink(event.target.value);
   };
 
   const handleSkills = (event) => {
     setSkills(event.target.value.toLowerCase());
+  };
+
+  const handleBody = (event) => {
+    setBody(event.target.value);
   };
 
   const handleSubmit = () => {
@@ -138,6 +143,17 @@ export default function CreateCard() {
         <div>
           <small id="titleHelp" class="form-text text-muted">
             Specify the skills showcased/requested
+          </small>
+        </div>
+        <label htmlFor="body-field">Body:</label>
+        <textarea
+          className="form-control"
+          onChange={handleBody}
+          id="body-field"
+        />
+        <div>
+          <small id="titleHelp" class="form-text text-muted">
+            Spark up some discussion!
           </small>
         </div>
         <div>
