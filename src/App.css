@@ -30,3 +30,7 @@ li:hover{
 .gallery-link, .create-link{
   margin-left: 20px;
 }
+
+.SimpleView{
+  display: flex;
+}
