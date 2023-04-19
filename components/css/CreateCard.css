@@ -1,7 +1,17 @@
-import React from 'react'
+.CreateCard{
+  display: flex;
+}
+.form-group{
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+  border: 2px solid white;
+  padding: 30px;
+  border-radius: 10px;
+}
 
-export default function CreateCard() {
-  return (
-    <div>CreateCard</div>
-  )
+.form-group:first-child{
+  display: flex;
+  justify-content: center;
+  margin-right: 20px;
 }

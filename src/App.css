@@ -5,8 +5,28 @@
   text-align: center;
 }
 
-nav{
+.nav-bar{
   position: absolute;
-  left: 0;
-  top: 0;
+  background-color: antiquewhite;
+  border-radius: 20px;
+  left: 10px;
+  top: 10px;
+}
+
+li{
+  display: inline;
+  list-style-type:none;
+  
+}
+
+li:hover{
+  background-color: aqua;
+}
+
+.home-link, .gallery-link, .create-link{
+  margin-right:40px;
+}
+
+.gallery-link, .create-link{
+  margin-left: 20px;
 }
