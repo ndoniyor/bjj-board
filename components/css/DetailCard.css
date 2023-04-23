@@ -1,5 +1,7 @@
-.DetailCard{
-  display: flex;
-  border: 1px solid white;
-  padding: 10px;
+import React from 'react'
+
+export default function DetailCard() {
+  return (
+    <div>DetailCard</div>
+  )
 }
