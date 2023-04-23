@@ -15,7 +15,6 @@ export default function CreateCard() {
       .from("posts")
       .insert({ title: title, link: link, skills: skills, category: category, body: body })
       .select();
-
     window.location = "/";
   };
 
