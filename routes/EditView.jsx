@@ -1,7 +1,10 @@
 import React from 'react'
+import EditCard from '../components/EditCard'
 
 export default function EditView() {
   return (
-    <div>EditView</div>
+    <div>
+      <EditCard/>
+    </div>
   )
 }

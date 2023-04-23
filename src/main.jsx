@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import SimpleView from "../routes/SimpleView";
 import CreateView from "../routes/CreateView";
 import DetailView from "../routes/DetailView";
+import EditView from "../routes/EditView";
 import Layout from "../routes/Layout";
 import "./index.css";
 
@@ -19,6 +20,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
             <Route path=":id" element={<DetailView />} />
           </Route>
           <Route index={false} path="/create/" element={<CreateView />} />
+          <Route index={false} path="/edit/*">
+            <Route path=":id" element={<EditView />} />
+          </Route>
         </Route>
       </Routes>
     </BrowserRouter>
