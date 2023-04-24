@@ -12,7 +12,6 @@ export default function CreateCard() {
   const [retry, setRetry] = useState(false);
 
   const createPost = async (event) => {
-    console.log(title,link,body,skills)
     await supabase
       .from("posts")
       .insert({ title: title, link: link, skills: skills, category: category, body: body, upvotes: 0 })
@@ -20,33 +19,29 @@ export default function CreateCard() {
     window.location = "/";
   };
 
+  const convertToEmbed = (url) => {
+    if (url.includes("youtube")) {
+      const embedLink = url.replace("watch?v=", "embed/");
+      return embedLink;
+    }
+    else if (url.includes("vimeo")) {
+      const embedLink = url.replace("vimeo.com", "player.vimeo.com/video");
+      return embedLink;
+    }
+    else {
+      return url;
+    }
+  }
+
   const handleCategory = (event) => {
     setCategory(event.target.id.split("-")[0]);
   };
 
-  const handleTitle = (event) => {
-    setTitle(event.target.value);
-    console.log(title)
-  };
-
-  const handleLink = (event) => {
-    setLink(event.target.value);
-  };
-
-  const handleSkills = (event) => {
-    setSkills(event.target.value.toLowerCase());
-  };
-
-  const handleBody = (event) => {
-    setBody(event.target.value);
-  };
-
   const handleSubmit = () => {
-    console.log("sending")
     if (!title || !skills || !category) {
       setRetry(true);
     }
-    else{
+    else {
       createPost();
     }
   };
@@ -77,9 +72,18 @@ export default function CreateCard() {
           <Col>
             <Form.Check
               type="radio"
-              label="Media"
+              label="Image"
               name="category-select"
-              id="Media-post"
+              id="Image-post"
+              onClick={handleCategory}
+            />
+          </Col>
+          <Col>
+            <Form.Check
+              type="radio"
+              label="Video"
+              name="category-select"
+              id="Video-post"
               onClick={handleCategory}
             />
           </Col>
@@ -89,17 +93,17 @@ export default function CreateCard() {
         <Form.Label>Title:</Form.Label>
         <Form.Control
           type="text"
-          onChange={handleTitle}
+          onChange={(e) => handleTitle(e.target.value)}
           id="title-field"
           placeholder="Give your post a name"
         />
       </Form.Group>
-      {(category === "Media") && (
+      {(category === "Video" || category === "Image") && (
         <Form.Group>
           <Form.Label>Link:</Form.Label>
           <Form.Control
             type="url"
-            onChange={handleLink}
+            onChange={(e) => handleLink(e.target.value)}
             id="link-field"
             placeholder="Specify the link to your image/video"
           />
@@ -109,7 +113,7 @@ export default function CreateCard() {
         <Form.Label>Skills:</Form.Label>
         <Form.Control
           as="textarea"
-          onChange={handleSkills}
+          onChange={(e) => setSkills(e.target.value)}
           id="skills-field"
           placeholder="Specify the skills showcased/requested"
         />
@@ -118,7 +122,7 @@ export default function CreateCard() {
         <Form.Label>Body:</Form.Label>
         <Form.Control
           as="textarea"
-          onChange={handleBody}
+          onChange={(e) => setBody(e.target.value)}
           id="body-field"
           placeholder="Spark up some discussion!"
         />
