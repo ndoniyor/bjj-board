@@ -1,6 +1,7 @@
 import React from 'react'
 import { useEffect, useState } from 'react';
 import { supabase } from '../src/client';
+import {Container} from 'react-bootstrap';
 import SimpleCard from '../components/SimpleCard';
 
 export default function SimpleView() {
@@ -15,7 +16,7 @@ export default function SimpleView() {
   },[])
 
   return (
-    <div className="SimpleView">
+    <Container className="SimpleView">
       {data && data.map((post)=>
         <SimpleCard 
           title={post.title}
@@ -24,6 +25,6 @@ export default function SimpleView() {
           id={post.id}
         />
       )}
-    </div>
+    </Container>
   )
 }

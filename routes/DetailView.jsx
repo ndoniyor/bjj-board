@@ -14,20 +14,19 @@ export default function DetailView() {
       .select("*")
       .eq("id", parseInt(id))
       .single();
-    console.log(id);
-    console.log(typeof id);
     setData(data_pre.data);
-    console.log(data);
   };
 
   useEffect(() => {
     getPost();
+    console.log(data)
+    
   }, []);
 
   return (
     <div className="DetailView">
-      <Link to={`/edit/${id}`}>Edit Post</Link>
       <DetailCard
+        id={data.id}
         title={data.title}
         link={data.link}
         category={data.category}

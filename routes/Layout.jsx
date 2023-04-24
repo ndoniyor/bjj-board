@@ -1,22 +1,18 @@
-import React from "react";
-import { Outlet, Link } from "react-router-dom";
+import React from 'react';
+import { Navbar, Nav } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Outlet, Link } from 'react-router-dom';
 
 export default function Layout() {
   return (
     <div>
-      <nav className="nav-bar">
-        <ul>
-          <li className="home-link" key="home-button">
-            <Link to="/">Home</Link>
-          </li>
-          <li className="gallery-link" key="gallery-button">
-            <Link to="/gallery">View Posts</Link>
-          </li>
-          <li className="create-link" key="create-button">
-              <Link to="/create">Create</Link>
-          </li>
-        </ul>
-      </nav>
+      <Navbar className="px-3 py-2" bg="dark" variant="dark" fixed="top">
+        <Navbar.Brand href="/">Home</Navbar.Brand>
+        <Nav>
+          <Nav.Link href="/gallery">View Posts</Nav.Link>
+          <Nav.Link href="/create">Create</Nav.Link>
+        </Nav>
+      </Navbar>
       <Outlet />
     </div>
   );
