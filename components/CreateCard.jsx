@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { supabase } from "../src/client";
+import { Form, Row, Col, Button } from 'react-bootstrap';
 import './css/CreateCard.css'
 
 export default function CreateCard() {
@@ -11,9 +12,10 @@ export default function CreateCard() {
   const [retry, setRetry] = useState(false);
 
   const createPost = async (event) => {
+    console.log(title,link,body,skills)
     await supabase
       .from("posts")
-      .insert({ title: title, link: link, skills: skills, category: category, body: body })
+      .insert({ title: title, link: link, skills: skills, category: category, body: body, upvotes: 0 })
       .select();
     window.location = "/";
   };
@@ -24,6 +26,7 @@ export default function CreateCard() {
 
   const handleTitle = (event) => {
     setTitle(event.target.value);
+    console.log(title)
   };
 
   const handleLink = (event) => {
@@ -39,129 +42,89 @@ export default function CreateCard() {
   };
 
   const handleSubmit = () => {
+    console.log("sending")
     if (!title || !skills || !category) {
       setRetry(true);
     }
-    createPost();
+    else{
+      createPost();
+    }
   };
 
   return (
-    <div className="CreateCard">
-      <div className="form-group">
-        <label className="form-check-label" htmlFor="category-select">
-          Category:
-        </label>
-        <div>
-          <div className="form-check form-check-inline">
-            <input
-              className="form-check-input"
+    <Form className="CreateCard">
+      <Form.Group>
+        <Form.Label>Category:</Form.Label>
+        <Row>
+          <Col>
+            <Form.Check
               type="radio"
+              label="Discussion"
               name="category-select"
-              id="discussion-post"
+              id="Discussion-post"
               onClick={handleCategory}
             />
-            <label className="form-check-label" htmlFor="discussion-post">
-              Discussion
-            </label>
-          </div>
-          <div className="form-check form-check-inline">
-            <input
-              className="form-check-input"
+          </Col>
+          <Col>
+            <Form.Check
               type="radio"
+              label="Question"
               name="category-select"
-              id="question-post"
+              id="Question-post"
               onClick={handleCategory}
             />
-            <label className="form-check-label" htmlFor="question-post">
-              Question
-            </label>
-          </div>
-          <div className="form-check form-check-inline">
-            <input
-              className="form-check-input"
+          </Col>
+          <Col>
+            <Form.Check
               type="radio"
+              label="Media"
               name="category-select"
-              id="image-post"
+              id="Media-post"
               onClick={handleCategory}
             />
-            <label className="form-check-label" htmlFor="image-post">
-              Image
-            </label>
-          </div>
-          <div className="form-check form-check-inline">
-            <input
-              className="form-check-input"
-              type="radio"
-              name="category-select"
-              id="video-post"
-              onClick={handleCategory}
-            />
-            <label className="form-check-label" htmlFor="video-post">
-              Video
-            </label>
-          </div>
-        </div>
-      </div>
-      <div className="form-group">
-        <div>
-          <label htmlFor="title-field">Title:</label>
-          <input
-            className="form-control"
-            onChange={handleTitle}
-            id="title-field"
-            aria-describedby="titleHelp"
-          />
-        </div>
-        <div>
-          <small id="titleHelp" class="form-text text-muted">
-            Give your post a name
-          </small>
-        </div>
-      {(category === "image" || category === "video") && (
-        <div>
-          <label htmlFor="link-field">Link: </label>
-          <input
+          </Col>
+        </Row>
+      </Form.Group>
+      <Form.Group>
+        <Form.Label>Title:</Form.Label>
+        <Form.Control
+          type="text"
+          onChange={handleTitle}
+          id="title-field"
+          placeholder="Give your post a name"
+        />
+      </Form.Group>
+      {(category === "Media") && (
+        <Form.Group>
+          <Form.Label>Link:</Form.Label>
+          <Form.Control
             type="url"
-            className="form-control"
             onChange={handleLink}
             id="link-field"
+            placeholder="Specify the link to your image/video"
           />
-          <div>
-            <small id="titleHelp" class="form-text text-muted">
-              Specify the link to your image/video
-            </small>
-          </div>
-        </div>
+        </Form.Group>
       )}
-        <label htmlFor="skills-field">Skills:</label>
-        <textarea
-          className="form-control"
+      <Form.Group>
+        <Form.Label>Skills:</Form.Label>
+        <Form.Control
+          as="textarea"
           onChange={handleSkills}
           id="skills-field"
+          placeholder="Specify the skills showcased/requested"
         />
-        <div>
-          <small id="titleHelp" class="form-text text-muted">
-            Specify the skills showcased/requested
-          </small>
-        </div>
-        <label htmlFor="body-field">Body:</label>
-        <textarea
-          className="form-control"
+      </Form.Group>
+      <Form.Group>
+        <Form.Label>Body:</Form.Label>
+        <Form.Control
+          as="textarea"
           onChange={handleBody}
           id="body-field"
+          placeholder="Spark up some discussion!"
         />
-        <div>
-          <small id="titleHelp" class="form-text text-muted">
-            Spark up some discussion!
-          </small>
-        </div>
-        <div>
-          <button type="submit" onClick={handleSubmit}>
-            Submit
-          </button>
-        </div>
-        {retry ? <h3>Please fill out all forms!</h3> : null}
-      </div>
-    </div>
+      </Form.Group>
+      <Button variant="outline-light" color='#fffff' classnName="mt-3" onClick={handleSubmit}>Submit</Button>
+      {retry && <h3>Please fill out all forms!</h3>}
+    </Form>
   );
 }

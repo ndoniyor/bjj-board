@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { supabase } from "../src/client";
 import { useParams } from "react-router-dom";
+import { Form, Row, Col, Button } from 'react-bootstrap';
 import './css/EditCard.css'
 
 export default function EditCard() {
@@ -69,7 +70,10 @@ export default function EditCard() {
     if (!title || !skills || !category) {
       setRetry(true);
     }
-    updatePost();
+    else{
+      updatePost();
+    }
+    
   };
 
   const handleDelete = () => {
@@ -77,133 +81,83 @@ export default function EditCard() {
   }
 
   return (
-    <div className="EditCard">
-      <div className="form-group">
-        <label className="form-check-label" htmlFor="category-select">
-          Category:
-        </label>
-        <div>
-          <div className="form-check form-check-inline">
-            <input
-              className="form-check-input"
+    <Form className="CreateCard">
+      <Form.Group>
+        <Form.Label>Category:</Form.Label>
+        <Row>
+          <Col>
+            <Form.Check
               type="radio"
+              label="Discussion"
               name="category-select"
-              id="discussion-post"
+              id="Discussion-post"
               onClick={handleCategory}
-              checked={category === 'discussion'}
+              checked={category==='Discussion'}
             />
-            <label className="form-check-label" htmlFor="discussion-post">
-              Discussion
-            </label>
-          </div>
-          <div className="form-check form-check-inline">
-            <input
-              className="form-check-input"
+          </Col>
+          <Col>
+            <Form.Check
               type="radio"
+              label="Question"
               name="category-select"
-              id="question-post"
+              id="Question-post"
               onClick={handleCategory}
-              checked={category === 'question'}
+              checked={category==='Question'}
             />
-            <label className="form-check-label" htmlFor="question-post">
-              Question
-            </label>
-          </div>
-          <div className="form-check form-check-inline">
-            <input
-              className="form-check-input"
+          </Col>
+          <Col>
+            <Form.Check
               type="radio"
+              label="Media"
               name="category-select"
-              id="image-post"
+              id="Media-post"
               onClick={handleCategory}
-              checked={category === 'image'}
+              checked={category==='Media'}
             />
-            <label className="form-check-label" htmlFor="image-post">
-              Image
-            </label>
-          </div>
-          <div className="form-check form-check-inline">
-            <input
-              className="form-check-input"
-              type="radio"
-              name="category-select"
-              id="video-post"
-              onClick={handleCategory}
-              checked={category === 'video'}
-            />
-            <label className="form-check-label" htmlFor="video-post">
-              Video
-            </label>
-          </div>
-        </div>
-      </div>
-      <div className="form-group">
-        <div>
-          <label htmlFor="title-field">Title:</label>
-          <input
-            className="form-control"
-            onChange={handleTitle}
-            id="title-field"
-            aria-describedby="titleHelp"
-            defaultValue={title}
+          </Col>
+        </Row>
+      </Form.Group>
+      <Form.Group>
+        <Form.Label>Title:</Form.Label>
+        <Form.Control
+          type="text"
+          onChange={handleTitle}
+          id="title-field"
+          defaultValue={title}
+        />
+      </Form.Group>
+      {(category === "Media") && (
+        <Form.Group>
+          <Form.Label>Link:</Form.Label>
+          <Form.Control
+            type="url"
+            onChange={handleLink}
+            id="link-field"
+            defaultValue={link}
           />
-        </div>
-        <div>
-          <small id="titleHelp" class="form-text text-muted">
-            Give your post a name
-          </small>
-        </div>
-        {(category === "image" || category === "video") && (
-          <div>
-            <label htmlFor="link-field">Link: </label>
-            <input
-              type="url"
-              className="form-control"
-              onChange={handleLink}
-              id="link-field"
-              defaultValue={link}
-            />
-            <div>
-              <small id="titleHelp" class="form-text text-muted">
-                Specify the link to your image/video
-              </small>
-            </div>
-          </div>
-        )}
-        <label htmlFor="skills-field">Skills:</label>
-        <textarea
-          className="form-control"
+        </Form.Group>
+      )}
+      <Form.Group>
+        <Form.Label>Skills:</Form.Label>
+        <Form.Control
+          as="textarea"
           onChange={handleSkills}
           id="skills-field"
           defaultValue={skills}
         />
-        <div>
-          <small id="titleHelp" class="form-text text-muted">
-            Specify the skills showcased/requested
-          </small>
-        </div>
-        <label htmlFor="body-field">Body:</label>
-        <textarea
-          className="form-control"
+      </Form.Group>
+      <Form.Group>
+        <Form.Label>Body:</Form.Label>
+        <Form.Control
+          as="textarea"
           onChange={handleBody}
           id="body-field"
           defaultValue={body}
         />
-        <div>
-          <small id="titleHelp" class="form-text text-muted">
-            Spark up some discussion!
-          </small>
-        </div>
-        <div>
-          <button type="submit" onClick={handleSubmit}>
-            Submit
-          </button>
-          <button type="submit" onClick={handleDelete}>
-            Delete Post
-          </button>
-        </div>
-        {retry ? <h3>Please fill out all forms!</h3> : null}
-      </div>
-    </div>
+      </Form.Group>
+      <Button variant="outline-light" color='#fffff' classnName="mt-3" onClick={handleSubmit}>Submit</Button>
+      <Button variant="outline-light" color='#fffff' classnName="mt-3" onClick={handleDelete}>Delete</Button>
+      {retry && <h3>Please fill out all forms!</h3>}
+    </Form>
   );
 }
