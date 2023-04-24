@@ -22,8 +22,26 @@ li:hover{
   margin-left: 20px;
 }
 
-.SimpleView{
+.simple-cards-container{
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+}
+.header-text{
+  display: flex;
+}
+
+label{
+  color: white;
+}
+
+.SimpleView{
+  position: relative;
+  top: 50px;
+}
+
+.view-options-container{
+  display: flex;
+  justify-content: center;
+  justify-content: space-between;
 }
