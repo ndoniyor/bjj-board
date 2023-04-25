@@ -44,7 +44,8 @@ export default function DetailCard(props) {
         </div>
         {(props.category === "Image") && <Image src={props.link} fluid />}
         {(props.category === "Video") &&
-          <iframe width="560"
+          <iframe
+            width="560"
             height="315"
             src={props.link} title="YouTube video player"
             frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -55,7 +56,7 @@ export default function DetailCard(props) {
         <div className="d-flex justify-content-between align-items-center">
           <div>
             <Button variant="outline-dark" as={Link} to={`/edit/${props.id}`} className="mt-3">
-              <AiOutlineEdit/>
+              <AiOutlineEdit />
             </Button>
             <Button variant="outline-dark" onClick={handleDelete} className="mt-3">
               <BiTrash />
