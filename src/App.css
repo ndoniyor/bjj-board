@@ -45,3 +45,24 @@ label{
   justify-content: center;
   justify-content: space-between;
 }
+
+.sort-container{
+  display: flex;
+  align-items: center;
+}
+
+#dropdown-basic-button{
+  margin-left: 10px;
+}
+
+.credit{
+  color: rgba(255, 255, 255, 0.282);
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.Image{
+  max-width: 560px;
+  max-height: 315px;
+}
