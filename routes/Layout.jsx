@@ -17,6 +17,7 @@ export default function Layout() {
         </Nav>
       </Navbar>
       <Outlet />
+      <small className="credit">Created by Doniyor Nimatullo</small>
     </div>
   );
 }
