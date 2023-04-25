@@ -4,7 +4,7 @@ Submitted by: **Doniyor Nimatullo**
 
 This web app: **is a forum for users to come together to discuss BJJ, whether it's questions, instructions, images or videos.**
 
-Time spent: **3** hours spent in total
+Time spent: **4** hours spent in total
 
 ## Required Features
 
@@ -18,27 +18,22 @@ The following **required** functionality is completed:
 - [x] **Users can sort posts by either their created time or upvotes count**
 - [x] **Users can search for posts by title**
 - [x] **A separate post page for each created post, where any additional information is shown is linked whenever a user clicks a post**
-- [ ] **Users can leave comments underneath a post on the post's separate page**
+- [x] **Users can leave comments underneath a post on the post's separate page**
 - [x] **Each post should have an upvote button on the post's page. Each click increases its upvotes count by one and users can upvote any number of times**
 - [x] **A previously created post can be edited or deleted from its post page**
-- [ ] Users can only edit and deleted posts or delete comments by entering the secret key, which is set by the user during post creation
+- [x] Users can only edit and deleted posts or delete comments by entering the secret key, which is set by the user during post creation
 
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+![walkthrough gif](./walkthrough.gif)
 
 <!-- Replace this with whatever GIF tool you used! -->
-GIF created with ...  
-<!-- Recommended tools:
-[Kap](https://getkap.co/) for macOS
-[ScreenToGif](https://www.screentogif.com/) for Windows
-[peek](https://github.com/phw/peek) for Linux. -->
+GIF created with Kap
 
 ## Notes
-
-Describe any challenges encountered while building the app.
+This project was the largest in scope, so the most difficult part was ensuring compatibility through all its layers, from the database to served content.
 
 ## License
 
