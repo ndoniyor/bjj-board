@@ -9,12 +9,13 @@ export default function CreateCard() {
   const [body, setBody] = useState("");
   const [skills, setSkills] = useState("");
   const [category, setCategory] = useState("");
+  const [key, setKey] = useState("");
   const [retry, setRetry] = useState(false);
 
   const createPost = async (event) => {
     await supabase
       .from("posts")
-      .insert({ title: title, link: link, skills: skills, category: category, body: body, upvotes: 0 })
+      .insert({ title: title, link: link, skills: skills, category: category, body: body, key: key, upvotes: 0 })
       .select();
     window.location = "/";
   };
@@ -93,7 +94,7 @@ export default function CreateCard() {
         <Form.Label>Title:</Form.Label>
         <Form.Control
           type="text"
-          onChange={(e) => handleTitle(e.target.value)}
+          onChange={(e) => setTitle(e.target.value)}
           id="title-field"
           placeholder="Give your post a name"
         />
@@ -103,7 +104,7 @@ export default function CreateCard() {
           <Form.Label>Link:</Form.Label>
           <Form.Control
             type="url"
-            onChange={(e) => handleLink(e.target.value)}
+            onChange={(e) => setLink(convertToEmbed(e.target.value))}
             id="link-field"
             placeholder="Specify the link to your image/video"
           />
@@ -127,7 +128,16 @@ export default function CreateCard() {
           placeholder="Spark up some discussion!"
         />
       </Form.Group>
-      <Button variant="outline-light" color='#fffff' classnName="mt-3" onClick={handleSubmit}>Submit</Button>
+      <Form.Group>
+        <Form.Label>Password:</Form.Label>
+        <Form.Control
+          type="password"
+          onChange={(e) => setKey(e.target.value)}
+          id="key-field"
+          placeholder="Protect your posts with a password"
+        />
+      </Form.Group>
+      <Button variant="outline-light" color='#fffff' className="mt-3" onClick={handleSubmit}>Submit</Button>
       {retry && <h3>Please fill out all forms!</h3>}
     </Form>
   );
